@@ -34,12 +34,13 @@ public class AdminController {
     }
 
     @GetMapping("/new")
-    public String getUserFormForCreate(Model model, Principal principal){
+    public String getUserFormForCreate(Model model, Principal principal) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", roleService.getAllRole());
         model.addAttribute("admin", userService.loadUserByUsername(principal.getName()));
         return "new";
     }
+
     @PostMapping()
     public String saveNewUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
@@ -47,7 +48,7 @@ public class AdminController {
     }
 
     @GetMapping("/{id}/edit")
-    public void getFormForEditUser(Model model, @PathVariable("id") Long id ){
+    public void getFormForEditUser(Model model, @PathVariable("id") Long id) {
         model.addAttribute("userEdit", userService.findById(id));
         User user = userService.findById(id);
         model.addAttribute("user", user);
@@ -56,14 +57,14 @@ public class AdminController {
     }
 
     @PostMapping("/{id}")
-    public String updateEditUser(@ModelAttribute("user") User user,  @RequestParam(value = "role") String role) {
-        user.setRoles( roleService.findRolesByName(role));
+    public String updateEditUser(@ModelAttribute("user") User user, @RequestParam(value = "role") String role) {
+        user.setRoles(roleService.findRolesByName(role));
         userService.updateUser(user);
         return "redirect:/admin";
     }
 
     @PostMapping("delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id){
+    public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
         return "redirect:/admin";
     }

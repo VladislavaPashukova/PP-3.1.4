@@ -20,7 +20,7 @@ public class User implements UserDetails {
     private String name;
 
     @Column(name = "password")
-    private  String password;
+    private String password;
 
     @Column(name = "email", unique = true)
     private String email;
@@ -33,8 +33,8 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
-        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
 
     public User() {

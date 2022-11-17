@@ -40,91 +40,91 @@
                         </ul>
                         <div class="card-header">
                             <h5>Add New User</h5>
-                        <div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center ">
-                                <div class="card-body">
+                            <div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center ">
+                                    <div class="card-body">
 
 
-                                    <form th:action="@{/admin}" th:object="${user}" method="post">
-                                        <div class="form-group">
-                                            <p class="m-0" align="center"><b>First name</b></p>
-                                            <input
-                                                    type="text"
-                                                    name="name"
-                                                    class="form-control"
-                                                    value=""
-                                                    placeholder=""
-                                            />
-                                        </div>
+                                        <form th:action="@{/admin}" th:object="${user}" method="post">
+                                            <div class="form-group">
+                                                <p class="m-0" align="center"><b>First name</b></p>
+                                                <input
+                                                        type="text"
+                                                        name="name"
+                                                        class="form-control"
+                                                        value=""
+                                                        placeholder=""
+                                                />
+                                            </div>
 
-                                        <div class="form-group">
-                                            <p class="m-0" align="center"><b>Last name</b></p>
-                                            <input
-                                                    type="text"
-                                                    name="lastName"
-                                                    class="form-control"
-                                                    value=""
-                                                    placeholder=""
-                                            />
-                                        </div>
+                                            <div class="form-group">
+                                                <p class="m-0" align="center"><b>Last name</b></p>
+                                                <input
+                                                        type="text"
+                                                        name="lastName"
+                                                        class="form-control"
+                                                        value=""
+                                                        placeholder=""
+                                                />
+                                            </div>
 
-                                        <div class="form-group">
-                                            <p class="m-0" align="center"><b>Age</b></p>
-                                            <input
-                                                    type="number"
-                                                    name="age"
-                                                    class="form-control"
-                                                    value=""
-                                                    placeholder=""
-                                            />
-                                        </div>
+                                            <div class="form-group">
+                                                <p class="m-0" align="center"><b>Age</b></p>
+                                                <input
+                                                        type="number"
+                                                        name="age"
+                                                        class="form-control"
+                                                        value=""
+                                                        placeholder=""
+                                                />
+                                            </div>
 
-                                        <div class="form-group">
-                                            <p class="m-0" align="center"><b>Email</b></p>
-                                            <input
-                                                    type="text"
-                                                    name="email"
-                                                    class="form-control"
-                                                    value=""
-                                                    placeholder=""
-                                            />
-                                        </div>
-                                        <div class="form-group">
-                                            <p class="m-0" align="center"><b>Password</b></p>
-                                            <input
-                                                    type="text"
-                                                    name="password"
-                                                    class="form-control"
-                                                    value=""
-                                                    placeholder=""
-                                            />
-                                        </div>
-                                        <div>
-                                        <p class="m-0" align="center" for="role"><b>Roles:</b></p>
-                                        </div>
-                                        <div>
-                                        <select class="custom-select" size="3" th:field="*{roles}"
-                                                type="text" id="role">
-                                            <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}"></option>
+                                            <div class="form-group">
+                                                <p class="m-0" align="center"><b>Email</b></p>
+                                                <input
+                                                        type="text"
+                                                        name="email"
+                                                        class="form-control"
+                                                        value=""
+                                                        placeholder=""
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="m-0" align="center"><b>Password</b></p>
+                                                <input
+                                                        type="text"
+                                                        name="password"
+                                                        class="form-control"
+                                                        value=""
+                                                        placeholder=""
+                                                />
+                                            </div>
+                                            <div>
+                                                <p class="m-0" align="center" for="role"><b>Roles:</b></p>
+                                            </div>
+                                            <div>
+                                                <select class="custom-select" multiple size="3" th:field="*{roles}"
+                                                        type="text" id="role">
+                                                    <option th:each="role : ${roles}" th:value="${role.id}"
+                                                            th:text="${role.role}"></option>
+                                                </select>
+                                            </div>
+                                            <br>
+                                            <div class="box-footer text-center">
+                                                <button type="submit" class="btn btn-success">
+                                                    Add new user
+                                                </button>
+                                            </div>
 
-                                        </select>
-                                        </div>
-                                        <br>
-                                        <div class="box-footer text-center">
-                                            <button type="submit" class="btn btn-success">
-                                                Add new user
-                                            </button>
-                                        </div>
 
+                                        </form>
 
-                                    </form>
-
+                                    </div>
                                 </div>
+
+
                             </div>
-
-
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>

@@ -21,6 +21,7 @@ public class InitUserToDB {
         this.userService = userService;
         this.roleService = roleService;
     }
+
     @PostConstruct
     private void initUserToDB() {
         Role roleAdmin = new Role("ROLE_ADMIN");
@@ -34,7 +35,7 @@ public class InitUserToDB {
         roleAdminList.add(roleAdmin);
         roleUserList.add(roleUser);
 
-        User user1 = new User("admin", "admin","admin@gmail.com", "admin", 23, roleAdminList);
+        User user1 = new User("admin", "admin", "admin@gmail.com", "admin", 23, roleAdminList);
         User user2 = new User("user", "user", "user@gmail.com", "user", 35, roleUserList);
 
         userService.saveUser(user1);
