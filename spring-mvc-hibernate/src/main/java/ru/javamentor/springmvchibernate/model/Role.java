@@ -4,9 +4,6 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
-
 @Data
 @Entity
 @Table(name = "roles")
@@ -18,7 +15,6 @@ public class Role implements GrantedAuthority {
 
     @Column(name = "role")
     private String role;
-
 
     public Role() {
     }
@@ -41,6 +37,4 @@ public class Role implements GrantedAuthority {
     public String toString() {
         return role.substring(5);
     }
-
-
 }

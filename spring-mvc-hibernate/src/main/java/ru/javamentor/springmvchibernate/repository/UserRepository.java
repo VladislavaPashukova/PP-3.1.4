@@ -8,6 +8,6 @@ import ru.javamentor.springmvchibernate.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query("SELECT c FROM User c JOIN FETCH c.roles WHERE c.username = :username")
-    User findByUsername(@Param("username") String username);
+    @Query("SELECT c FROM User c JOIN FETCH c.roles WHERE c.email = :email")
+    User findByEmail(@Param("email") String email);
 }

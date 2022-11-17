@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -12,25 +13,26 @@
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-        <p class="navbar-brand text-white">
-            <b th:object="${admin}"><span class="align-middle" th:text="${admin.getUsername()}"></span></b>
-            <span class="align-middle">with roles:</span>
-            <span class="align-middle" th:text="${admin.getRoles()}"></span>
-        </p>
+    <a class="navbar-brand"
+       th:text="|${admin.getUsername()} with roles: ${admin.getRoles()}|">
+    </a>
+        <div>
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="btn btn-dark text-secondary">Logout</button>
         </form>
-    </div>
+        </div>
 </nav>
 
 <section>
     <div class="container-fluid">
         <div class="row">
             <div class="col-2 p-0">
-                <div class="nav flex-column nav-pills pt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" aria-controls="v-pills-home" aria-selected="true">Admin</a>
-                    <a class="nav-item nav-link" th:href="@{/user}">User</a>
+                <div class="nav flex-column nav-pills pt-4" id="v-pills-tab" role="tabList" aria-orientation="vertical">
+                    <a class="nav-link active" href="/admin" sec:authorize="hasRole('ROLE_ADMIN')" role="tab"
+                       aria-controls="v-pills-home" aria-selected="true">Admin</a>
+                    <a class="nav-link" href="/user" sec:authorize="(hasAnyRole('ROLE_ADMIN', 'ROLE_USER'))"
+                       role="tab"
+                       aria-controls="v-pills-profile" aria-selected="false">User</a>
                 </div>
             </div>
 
@@ -68,7 +70,7 @@
                                     </tr>
                                     <tr th:each="users : ${users}">
                                         <td th:text="${users.id}">id</td>
-                                        <td th:text="${users.username}">name</td>
+                                        <td th:text="${users.name}">name</td>
                                         <td th:text="${users.lastName}">Last name</td>
                                         <td th:text="${users.age}">age</td>
                                         <td th:text="${users.email}">email</td>
@@ -92,8 +94,8 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="form-group">
-                                                                    <label for="id" class="col-form-label">Id</label>
+                                                                <div class="form-group text-center">
+                                                                    <label for="id" class="col-form-label"><b>ID</b></label>
                                                                     <input
                                                                             type="number"
                                                                             class="form-control"
@@ -103,17 +105,17 @@
                                                                             readonly>
                                                                 </div>
 
-                                                                <div class="form-group">
-                                                                    <label for="username" class="col-form-label">Name</label>
+                                                                <div class="form-group text-center">
+                                                                    <label for="name" class="col-form-label"><b>First Name</b></label>
                                                                     <input type="text"
                                                                            class="form-control"
-                                                                           name="username"
-                                                                           th:value="${users.username}"
-                                                                           id="username">
+                                                                           name="name"
+                                                                           th:value="${users.name}"
+                                                                           id="name">
                                                                 </div>
 
-                                                                <div class="form-group">
-                                                                    <label for="lastname" class="col-form-label">Last Name</label>
+                                                                <div class="form-group text-center">
+                                                                    <label for="lastname" class="col-form-label"><b>Last Name</b></label>
                                                                     <input type="text"
                                                                            class="form-control"
                                                                            name="lastName"
@@ -121,8 +123,8 @@
                                                                            id="lastname">
                                                                 </div>
 
-                                                                <div class="form-group">
-                                                                    <label for="age" class="col-form-label">Age</label>
+                                                                <div class="form-group text-center">
+                                                                    <label for="age" class="col-form-label"><b>Age</b></label>
                                                                     <input type="number"
                                                                            class="form-control"
                                                                            name="age"
@@ -130,8 +132,8 @@
                                                                            id="age">
                                                                 </div>
 
-                                                                <div class="form-group">
-                                                                    <label for="email" class="col-form-label">Email</label>
+                                                                <div class="form-group text-center">
+                                                                    <label for="email" class="col-form-label"><b>Email</b></label>
                                                                     <input type="text"
                                                                            class="form-control"
                                                                            name="email"
@@ -139,8 +141,8 @@
                                                                            id="email">
                                                                 </div>
 
-                                                                <div class="form-group">
-                                                                    <label for="password" class="col-form-label">Password</label>
+                                                                <div class="form-group text-center">
+                                                                    <label for="password" class="col-form-label"><b>Password</b></label>
                                                                     <input type="password"
                                                                            class="form-control"
                                                                            th:value="${users.password}"
@@ -148,13 +150,13 @@
                                                                            id="password">
                                                                 </div>
 
-                                                                <div class="form-group">
-                                                                    <label for="role">Role</label>
+                                                                <div class="form-group text-center">
+                                                                    <label for="role"><b>Role</b></label>
                                                                     <select multiple class="custom-select w-100"
                                                                             id="role" name="role">
                                                                         <option
                                                                                 th:each="role : ${roles}"
-                                                                                th:value="${role.role}"
+                                                                                th:value="${role.getRole()}"
                                                                                 th:text="${role.getRole()}"
                                                                                 th:selected="${users.roles.contains(role)}">
                                                                         </option>
@@ -204,9 +206,9 @@
 
 
                                                                     <div class="form-group">
-                                                                        <label for="deleteUsername"><b>Username</b></label>
+                                                                        <label for="deleteUsername"><b>First Name</b></label>
                                                                         <input type="text" class="form-control"
-                                                                               th:value="*{users.username}"
+                                                                               th:value="*{users.name}"
                                                                                id="deleteUsername" disabled>
                                                                     </div>
 

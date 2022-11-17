@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -10,12 +11,10 @@
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-    <p class="navbar-brand text-white">
-      <b th:object="${user}"><span class="align-middle" th:text="${user.getUsername()}"></span></b>
-      <span class="align-middle">with roles:</span>
-      <span class="align-middle" th:text="${user.getRoles()}"></span>
-    </p>
+  <a class="navbar-brand"
+     th:text="|${user.getUsername()} with roles: ${user.getRoles()}|">
+  </a>
+  <div>
     <form th:action="@{/logout}" method="post">
       <button type="submit" class="btn btn-dark text-secondary">Logout</button>
     </form>
@@ -26,8 +25,11 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-2 p-0">
-        <div class="nav flex-column nav-pills pt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" aria-controls="v-pills-home" aria-selected="true">User</a>
+        <div class="nav flex-column nav-pills pt-4" id="v-pills-tab" role="role" aria-orientation="vertical">
+          <a class="nav-link" href="/admin" sec:authorize="hasRole('ROLE_ADMIN')" role="tab"
+             aria-controls="v-pills-home" aria-selected="true">Admin</a>
+          <a class="nav-link active" href="/user" sec:authorize="(hasAnyRole('ROLE_ADMIN', 'ROLE_USER'))" role="tab"
+             aria-controls="v-pills-profile" aria-selected="false">User</a>
         </div>
       </div>
       <div class="col-10 px-0">
@@ -53,7 +55,7 @@
                   </tr>
                   <tr th:each="user : ${user}">
                     <td th:text="${user.id}">id</td>
-                    <td th:text="${user.username}">name</td>
+                    <td th:text="${user.name}">name</td>
                     <td th:text="${user.lastName}">lastname</td>
                     <td th:text="${user.age}">age</td>
                     <td th:text="${user.email}">email</td>

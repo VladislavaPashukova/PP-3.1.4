@@ -31,7 +31,6 @@ public class RoleServiceImpl implements RoleService{
         roleRepository.save(role);
     }
 
-
     @Override
     public Set<Role> findRolesByName(String roleName) {
         Set<Role> roles = new HashSet<>();

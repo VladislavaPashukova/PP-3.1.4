@@ -8,9 +8,7 @@ import ru.javamentor.springmvchibernate.service.RoleService;
 import ru.javamentor.springmvchibernate.service.UserService;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Component

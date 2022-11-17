@@ -1,19 +1,15 @@
 package ru.javamentor.springmvchibernate.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.javamentor.springmvchibernate.model.Role;
 import ru.javamentor.springmvchibernate.model.User;
 import ru.javamentor.springmvchibernate.service.RoleServiceImpl;
 import ru.javamentor.springmvchibernate.service.UserServiceImpl;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -51,13 +47,12 @@ public class AdminController {
     }
 
     @GetMapping("/{id}/edit")
-    public String getFormForEditUser(Model model, @PathVariable("id") Long id ){
+    public void getFormForEditUser(Model model, @PathVariable("id") Long id ){
         model.addAttribute("userEdit", userService.findById(id));
         User user = userService.findById(id);
         model.addAttribute("user", user);
         model.addAttribute("user", userService.findById(id));
         model.addAttribute("role", roleService.getAllRole());
-        return "edit";
     }
 
     @PostMapping("/{id}")
@@ -66,7 +61,6 @@ public class AdminController {
         userService.updateUser(user);
         return "redirect:/admin";
     }
-
 
     @PostMapping("delete/{id}")
     public String deleteUser(@PathVariable("id") Long id){
